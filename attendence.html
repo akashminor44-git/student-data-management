@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Roster | Data Management</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 5%;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        /* Tab Navigation (Simple Tabs) */
+        .tab-nav {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #555;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        .tab-button.active {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+        }
+
+        .tab-content {
+            padding: 15px 0;
+        }
+        
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #e9ecef;
+            color: #333;
+        }
+        
+        /* Editable Input Fields */
+        input[type="text"] {
+            width: 90%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't widen the input */
+        }
+
+        /* Action Buttons */
+        .action-cell button {
+            padding: 8px 12px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .save-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .save-btn:hover {
+            background-color: #218838;
+        }
+        
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        
+        .add-row-btn {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ffc107;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Data Management Editor</h1>
+    </header>
+    <main>
+        <h2>Edit Roster Data</h2>
+
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="showTab('teachers')">Teachers</button>
+            <button class="tab-button" onclick="showTab('students')">Students</button>
+            <button class="tab-button" onclick="showTab('subjects')">Subjects</button>
+        </div>
+
+        <div id="teachers" class="tab-content">
+            <h3>Teacher List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>T101</td>
+                        <td><input type="text" value="Professor Jane Doe" name="teacher_name_1"></td>
+                        <td><input type="text" value="j.doe@school.edu" name="teacher_email_1"></td>
+                        <td class="action-cell">
+                            <button class="save-btn">Save</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>T102</td>
+                        <td><input type="text" value="Dr. Robert Smith" name="teacher_name_2"></td>
+                        <td><input type="text" value="r.smith@school.edu" name="teacher_email_2"></td>
+                        <td class="action-cell">
+                            <button class="save-btn">Save</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="add-row-btn">Add New Teacher</button>
+        </div>
+
+        <div id="students" class="tab-content" style="display:none;">
+            <h3>Student Roster</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Major</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S001</td>
+                        <td><input type="text" value="Alice Johnson" name="student_name_1"></td>
+                        <td><input type="text" value="Computer Science" name="student_major_1"></td>
+                        <td class="action-cell">
+                            <button class="save-btn">Save</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>S002</td>
+                        <td><input type="text" value="Bob Williams" name="student_name_2"></td>
+                        <td><input type="text" value="Mathematics" name="student_major_2"></td>
+                        <td class="action-cell">
+                            <button class="save-btn">Save</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="add-row-btn">Add New Student</button>
+        </div>
+
+        <div id="subjects" class="tab-content" style="display:none;">
+            <h3>Subject/Course List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Subject Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>MATH101</td>
+                        <td><input type="text" value="Introductory Calculus" name="subject_name_1"></td>
+                        <td class="action-cell">
+                            <button class="save-btn">Save</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CS202</td>
+                        <td><input type="text" value="Data Structures & Algorithms" name="subject_name_2"></td>
+                        <td class="action-cell">
+                            <button class="save-btn">Save</button>
+                            <button class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="add-row-btn">Add New Subject</button>
+        </div>
+
+    </main>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.style.display = 'none');
+
+            // Deactivate all tab buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // Show the selected tab content
+            document.getElementById(tabId).style.display = 'block';
+
+            // Activate the corresponding button
+            document.querySelector(`.tab-button[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+        
+        // Ensure the first tab is active on load
+        document.addEventListener('DOMContentLoaded', () => {
+            showTab('teachers');
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Login</title>
+    </head>
+<body>
+    <header><h1>Attendance Tracking System</h1></header>
+    <main>
+        <form action="dashboard.html" method="POST"> 
+            <h2>Teacher Login</h2>
+            <div class="form-group">
+                <label for="username">Username/Email:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button> 
+        </form>
+    </main>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    </head>
+<body>
+    <header>
+        <h1>Welcome, Professor Anderson</h1>
+        <nav>
+            <a href="reports.html">Reports</a> 
+            <a href="login.html">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Your Classes Today</h2>
+        <section class="class-list">
+            <div class="class-card">
+                <h3>Math 101 - Section A</h3>
+                <p>Enrolled Students: 35</p>
+                <a href="attendance_marking.html?classId=101">Mark Attendance</a>
+            </div>
+            <div class="class-card">
+                <h3>Physics Lab - Sec B</h3>
+                <p>Enrolled Students: 22</p>
+                <a href="attendance_marking.html?classId=102">Mark Attendance</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
