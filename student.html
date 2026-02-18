@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Data</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Details</h2>
+
+    <input type="text" id="name" placeholder="Student Name">
+    <input type="number" id="attendance" placeholder="Attendance (%)">
+    <input type="number" id="marks" placeholder="Marks">
+    <input type="text" id="grade" placeholder="Grade">
+    <input type="number" id="total" placeholder="Total Marks">
+
+    <button onclick="saveData()">Save</button>
+    <button onclick="logout()" class="logout">Logout</button>
+
+    <p id="message" class="success"></p>
+</div>
+
+<script>
+// Redirect if not logged in
+if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "index.html";
+}
+
+// Load saved data
+window.onload = function() {
+    document.getElementById("name").value = localStorage.getItem("name") || "";
+    document.getElementById("attendance").value = localStorage.getItem("attendance") || "";
+    document.getElementById("marks").value = localStorage.getItem("marks") || "";
+    document.getElementById("grade").value = localStorage.getItem("grade") || "";
+    document.getElementById("total").value = localStorage.getItem("total") || "";
+};
+
+function saveData() {
+    localStorage.setItem("name", document.getElementById("name").value);
+    localStorage.setItem("attendance", document.getElementById("attendance").value);
+    localStorage.setItem("marks", document.getElementById("marks").value);
+    localStorage.setItem("grade", document.getElementById("grade").value);
+    localStorage.setItem("total", document.getElementById("total").value);
+
+    document.getElementById("message").innerText = "Student Data Saved Successfully!";
+}
+
+function logout() {
+    localStorage.removeItem("loggedIn");
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
